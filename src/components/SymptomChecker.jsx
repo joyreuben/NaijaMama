@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { dangerSigns } from '../data/dangerSigns'
 
 export default function SymptomChecker() {
   const [selected, setSelected] = useState([])
   const [language, setLanguage] = useState('english')
   const [submitted, setSubmitted] = useState(false)
+  const navigate = useNavigate()
 
   const toggle = (id) => {
     setSelected(prev =>
@@ -135,12 +136,12 @@ export default function SymptomChecker() {
               : resultConfig[result].subtitle}
           </div>
           {result === 'danger' && (
-            <a
-              href="/emergency"
+            <button
+              onClick={() => navigate('/emergency')}
               className="mt-4 inline-flex items-center gap-2 bg-white text-red-600 font-bold px-6 py-3 rounded-xl hover:bg-red-50 transition-all"
             >
               🆘 Send Emergency Alert →
-            </a>
+            </button>
           )}
         </div>
       )}
